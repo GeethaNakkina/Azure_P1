@@ -1,20 +1,10 @@
-# FROM node:latest
-
-# WORKDIR /src/app
-
-# COPY package.json ./
-
-# RUN npm install
-
-# COPY . .
-
-# EXPOSE 8081
-# CMD [ "node", "index.html" ]
-
-#Stage 1
+#stage 1
 FROM node:latest as node
-WORKDIR /src/app
+WORKDIR /app
 COPY . .
-EXPOSE 8081
 RUN npm install
-RUN npm run
+RUN npm run build
+#stage 2
+FROM nginx:alpine
+COPY --from=node /dist/Azure_P1 /usr/share/nginx/html
+EXPOSE 8081
