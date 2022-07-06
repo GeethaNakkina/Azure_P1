@@ -1,7 +1,10 @@
-FROM node:12.7-alpine AS build
-WORKDIR /usr/src/app
-COPY package.json package-lock.json ./
-RUN npm install
+#stage 1
+FROM node:latest as node
+WORKDIR /app
 COPY . .
-RUN npm run build
+RUN npm install
+RUN npm run build --prod
+#stage 2
+FROM nginx:alpine
+COPY --from=node /app/dist/azure-p1 /usr/share/nginx/html
 EXPOSE 8081
