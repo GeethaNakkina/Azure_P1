@@ -7,4 +7,3 @@ RUN npm run build --prod
 #stage 2
 FROM nginx:alpine
 COPY --from=node /app/dist/azure-p1 /usr/share/nginx/html
-EXPOSE 4200
