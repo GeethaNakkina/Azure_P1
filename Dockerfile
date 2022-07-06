@@ -1,12 +1,19 @@
-FROM node:latest
+# FROM node:latest
 
-WORKDIR /usr/src/app
+# WORKDIR /src/app
 
-COPY package.json ./
+# COPY package.json ./
 
-RUN npm install
+# RUN npm install
 
+# COPY . .
+
+# EXPOSE 8081
+# CMD [ "node", "index.html" ]
+
+#Stage 1
+FROM node:latest as node
+WORKDIR /src/app
 COPY . .
-
-EXPOSE 8081
-CMD [ "node", "index.js" ]
+RUN npm install
+RUN npm run
