@@ -15,5 +15,6 @@
 FROM node:latest as node
 WORKDIR /src/app
 COPY . .
+EXPOSE 8081
 RUN npm install
 RUN npm run
